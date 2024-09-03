@@ -38,28 +38,67 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    function filterUserAge( persons ){
+      return persons.filter( person => person.year >= 1500 && person.year < 1600 ) 
+    }
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    function fullNameArray( persons ){
+      return persons.map( (person) => person.first + ' ' + person.last )
+    }
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    function sortBirthday( persons ){
+      persons.sort( (person1, person2) => { return (person2.passed - person2.year) - (person1.passed - person1.year) })
+    }
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    function allLifeSpent( persons ){
+      return persons.reduce( (total, person) => {
+        return (person.passed - person.year) + total;
+      }, 0)
+    }
 
     // 5. Sort the inventors by years lived
-
+    function sortBirthday( persons ){
+      persons.sort( (person1, person2) => { return (person2.passed - person2.year) - (person1.passed - person1.year) })
+    }
+    
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    function sortLastName( persons ){
+      return persons.map(person => person.split(', ')).sort((a, b) => { if(b[1] > a[1]) {return -1} else return 1 });
+    }
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    function counter(data){
+      let uniqueData = []
+      let b;
+
+      for( let i = data.length; i >= 0; i-- ){
+        b = true;
+        for( let j = uniqueData.length-1; j >= 0; j-- ){
+          if( uniqueData[j].name === data[i] ){
+            uniqueData[j].counted++;
+            b = false;
+          }
+        }
+        if (b)
+          uniqueData.push({ name: data[i], counted: 1 });
+      }
+      return uniqueData;
+    }
+    console.log(counter(data));
 
   </script>
 </body>
